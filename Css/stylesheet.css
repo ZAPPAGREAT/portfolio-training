@@ -532,11 +532,25 @@ a {
   background: #17171c;
   color: #fff;
   text-align: center;
+  opacity: 0;
+  transform: translateY(14px) scale(0.98);
+  transition: opacity 220ms ease, transform 240ms ease;
+}
+
+.source-modal.is-open {
+  opacity: 1;
+  transform: translateY(0) scale(1);
 }
 
 .source-modal::backdrop {
   background: rgb(0 0 0 / 72%);
   backdrop-filter: blur(3px);
+  opacity: 0;
+  transition: opacity 220ms ease;
+}
+
+.source-modal.is-open::backdrop {
+  opacity: 1;
 }
 
 .source-modal h2 {

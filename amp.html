@@ -134,17 +134,26 @@
 
 	<script>
 		const sourceModal = document.querySelector(".source-modal");
+		const closeSourceModal = () => {
+			sourceModal.classList.remove("is-open");
+			window.setTimeout(() => {
+				if (sourceModal.open) sourceModal.close();
+			}, 180);
+		};
 
 		document.querySelectorAll(".model-trigger").forEach((model) => {
-			model.addEventListener("click", () => sourceModal.showModal());
+			model.addEventListener("click", () => {
+				sourceModal.classList.add("is-open");
+				sourceModal.showModal();
+			});
 		});
 
-		document.querySelector(".source-modal-close").addEventListener("click", () => sourceModal.close());
+		document.querySelector(".source-modal-close").addEventListener("click", closeSourceModal);
 		document.addEventListener("keydown", (event) => {
-			if (event.key === "Escape" && sourceModal.open) sourceModal.close();
+			if (event.key === "Escape" && sourceModal.open) closeSourceModal();
 		});
 		sourceModal.addEventListener("click", (event) => {
-			if (event.target === sourceModal) sourceModal.close();
+			if (event.target === sourceModal) closeSourceModal();
 		});
 		sourceModal.querySelectorAll("a").forEach((link) => {
 			link.addEventListener("click", (event) => event.preventDefault());
